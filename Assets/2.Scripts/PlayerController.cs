@@ -1,22 +1,30 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
     private Transform tr;
+    private Vector3 movement;
+    private Rigidbody rigidbody;
+    private Animator animator;
     private float h;
     private float v;
+    private float r;
     
     private float level;
     private float hp;
     private float power;
     private float defense;
     public float moveSpeed = 10.0f;
+    public float rotSpeed = 80.0f;
 
     void Start()
     {
         tr = GetComponent<Transform>();
+        rigidbody = GetComponent<Rigidbody>();
+        animator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -26,16 +34,24 @@ public class PlayerController : MonoBehaviour
         h = Input.GetAxis("Horizontal");
         v = Input.GetAxis("Vertical");
         move(h, v);
-        
+        turn();
+        animationUpdate();
     }
 
     private void move(float h, float v)
     {
-        //이동 인풋을 받아 캐릭터를 속도만큼 이동시킴 
-        h = h * moveSpeed * Time.deltaTime;
-        v = v * moveSpeed * Time.deltaTime;
-        tr.Translate(Vector3.right * h);
-        tr.Translate(Vector3.forward * v);
+        movement.Set(h, 0, v);
+        movement = movement.normalized * moveSpeed * Time.deltaTime;
+
+        rigidbody.MovePosition(tr.position + movement);
+
+    }
+
+    private void turn()
+    {
+        Quaternion newRotation = Quaternion.LookRotation(movement);
+
+        rigidbody.MoveRotation(newRotation);
     }
 
     private float attack()
@@ -49,5 +65,11 @@ public class PlayerController : MonoBehaviour
         //받은 데미지 만큼 hp 감소
         hp = -damage;
     }
-
+    private void animationUpdate()
+    {
+        if (h == 0 && v == 0)
+            animator.SetBool("isRunning", false);
+        else
+            animator.SetBool("isRunning", true);
+    }
 }
