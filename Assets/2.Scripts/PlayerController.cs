@@ -35,6 +35,9 @@ public class PlayerController : MonoBehaviour
         v = Input.GetAxis("Vertical");
         move(h, v);
         turn();
+        if (Input.GetButtonDown("Fire1")){
+            attack();
+        }
         animationUpdate();
     }
 
@@ -49,6 +52,9 @@ public class PlayerController : MonoBehaviour
 
     private void turn()
     {
+        if (h == 0 && v == 0)
+            return;
+
         Quaternion newRotation = Quaternion.LookRotation(movement);
 
         rigidbody.MoveRotation(newRotation);
@@ -56,6 +62,8 @@ public class PlayerController : MonoBehaviour
 
     private float attack()
     {
+        Debug.Log("attack");
+        animator.SetTrigger("attack");
         // power 와 몬스터 상태를 계산해 공력력을 내보낸다
         return power;
     }

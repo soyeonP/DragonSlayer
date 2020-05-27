@@ -20,8 +20,8 @@ public class MainCamera : MonoBehaviour
     void LateUpdate()
     {
         cameraPosition.x = player.transform.position.x + offsetX;
-        cameraPosition.y = player.transform.position.x + offsetY;
-        cameraPosition.z = player.transform.position.x + offsetZ;
+        cameraPosition.y = player.transform.position.y + offsetY;
+        cameraPosition.z = player.transform.position.z + offsetZ;
 
         //transform.position = cameraPosition;
         transform.position = Vector3.Lerp(transform.position, cameraPosition, followSpeed * Time.deltaTime);
