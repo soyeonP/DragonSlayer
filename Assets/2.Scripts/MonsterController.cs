@@ -1,14 +1,16 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class MonsterController : MonoBehaviour
 {
     private Transform EnemyTr;
     private Transform PlayerTr;
-
+    private NavMeshAgent nvAgent;
     private GameObject player;
     private PlayerController playerScript;
+    public List<Transform> wayPoints;
 
     public enum EnemyState { idle, trace, attack, die, PlayerDie };
     public EnemyState enemyState = EnemyState.idle;
@@ -22,7 +24,7 @@ public class MonsterController : MonoBehaviour
 
         EnemyTr = this.gameObject.GetComponent<Transform>();
         PlayerTr = player.GetComponent<Transform>();
-        //nvAgent = this.gameObject.GetComponent<NavMeshAgent>();
+        nvAgent = this.gameObject.GetComponent<NavMeshAgent>();
         playerScript = player.GetComponent<PlayerController>();
     }
     //https://wikidocs.net/18505
