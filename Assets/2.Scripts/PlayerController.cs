@@ -19,6 +19,7 @@ public class PlayerController : MonoBehaviour
     private float defense;
     public float moveSpeed = 10.0f;
     public float rotSpeed = 80.0f;
+    public float PlayerHP = 100.0f;
 
     void Start()
     {
@@ -60,15 +61,14 @@ public class PlayerController : MonoBehaviour
         rigidbody.MoveRotation(newRotation);
     }
 
-    private float attack()
+    public float attack()
     {
-        Debug.Log("attack");
         animator.SetTrigger("attack");
         // power 와 몬스터 상태를 계산해 공력력을 내보낸다
         return power;
     }
 
-    private void hurt(float damage)
+    public void hurt(float damage)
     {
         //받은 데미지 만큼 hp 감소
         hp = -damage;
@@ -79,5 +79,15 @@ public class PlayerController : MonoBehaviour
             animator.SetBool("isRunning", false);
         else
             animator.SetBool("isRunning", true);
+    }
+
+    void OnCollisionEnter(Collision other)
+    {
+        Debug.Log("collisionEvent");
+        if (other.collider.tag == "Monster" )
+        {
+            animator.SetTrigger("attack");
+            Debug.Log("collisionEvent : monster attack");
+        }
     }
 }
