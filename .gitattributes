@@ -1,0 +1,12 @@
+*.cs diff=csharp text
+*.cginc test
+*.shader text
+*.unity merge=unityyamlmerge eol=lf
+*.prefab merge=unityyamlmerge eol=lf
+*.mat -merge eol=lf
+*.anim -merge eol=lf
+*.physocMaterial -merge eol=lf
+*.asset -merge eol=lf
+*.meta -merge eol=lf
+*.controller -merge eol=lf
+*.spriteatlas -merge eol=lf
