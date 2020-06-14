@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class PlayerController : MonoBehaviour
 {
@@ -12,7 +13,7 @@ public class PlayerController : MonoBehaviour
     private Animator animator;
     public GameObject attackBoundary;
 
-    public float moveSpeed = 20.0f;
+    public float moveSpeed ;
     public float rotSpeed = 80.0f;
     public float PlayerHP = 100.0f;
 
@@ -94,7 +95,7 @@ public class PlayerController : MonoBehaviour
 
         if(!notMove && !isAttack)
         {
-            if (Input.GetButtonDown("Fire1"))
+            if (Input.GetButtonDown("Fire1")&& !EventSystem.current.IsPointerOverGameObject())
             {
                 musicPlay_attack.MusicStart();
                 musicPlay_sword.MusicStart();
