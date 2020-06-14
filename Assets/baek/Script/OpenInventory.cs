@@ -53,6 +53,8 @@ public class OpenInventory : MonoBehaviour
 
     public void CloseInventory()
     {
+        musicPlay.MusicChange(inventoryOpenSE);
+        musicPlay.MusicStart();
         inventoryUI.SetActive(false);
         isOpenInventory = false;
     } 
