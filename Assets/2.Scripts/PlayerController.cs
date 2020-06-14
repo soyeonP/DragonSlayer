@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
 using UnityEngine;
@@ -9,7 +10,8 @@ public class PlayerController : MonoBehaviour
     private Vector3 movement;
     private Rigidbody rigidbody;
     private Animator animator;
-    
+    public GameObject attackBoundary;
+
     public float moveSpeed = 20.0f;
     public float rotSpeed = 80.0f;
     public float PlayerHP = 100.0f;
@@ -17,12 +19,16 @@ public class PlayerController : MonoBehaviour
     private float h;
     private float v;
     private float r;
-    
+
     private float level;
     private float hp;
     private float power;
     private float defense;
     public bool isAttack;
+    public bool notMove;
+    public bool canMove = true;
+    public float attakDelay;
+    private float currentAttackDelay;
 
 
     void Start()
@@ -30,23 +36,75 @@ public class PlayerController : MonoBehaviour
         tr = GetComponent<Transform>();
         rigidbody = GetComponent<Rigidbody>();
         animator = GetComponent<Animator>();
-        isAttack= false;
+        isAttack = false;
+        notMove = false;
+    }
+
+    IEnumerator MoveCoroutine()
+    {
+
+        while ((h != 0 || v != 0) && !notMove && !isAttack)
+        {
+            h = Input.GetAxis("Horizontal");
+            v = Input.GetAxis("Vertical");
+            move(h, v);
+            turn();
+          
+            animationUpdate();
+
+            yield return new WaitForSeconds(0.01f);
+        }
+
+        canMove = true;
+    }
+
+    bool check(float h, float v)
+    {
+        if (Math.Round(h, 1) == 0 && Math.Round(v, 1) == 0)
+            return true;
+        else
+            return false;
+        
     }
 
     // Update is called once per frame
     void Update()   
     {
+        
         h = Input.GetAxis("Horizontal");
         v = Input.GetAxis("Vertical");
-        move(h, v);
-        turn();
-        if (Input.GetButtonDown("Fire1")){
-            isAttack=true;
-            attack();
-        }else{
-            isAttack=false;
+        
+        if(canMove && !isAttack && !notMove)
+        {
+            if(h!=0 || v != 0)
+            {
+                canMove = false;
+                StartCoroutine(MoveCoroutine());
+            }
         }
-        animationUpdate();
+
+        if(!notMove && !isAttack)
+        {
+            if (Input.GetButtonDown("Fire1"))
+            {
+                currentAttackDelay = attakDelay;
+                attack();
+                Debug.Log("attack!");
+            }
+        }
+
+        if (isAttack)
+        {
+            attackBoundary.SetActive(true);
+            currentAttackDelay -= Time.deltaTime;
+            if(currentAttackDelay <= 0)
+            {
+                isAttack = false;
+                attackBoundary.SetActive(false);
+            }
+        }
+
+        
     }
 
     private void move(float h, float v)
@@ -70,6 +128,7 @@ public class PlayerController : MonoBehaviour
 
     public float attack()
     {
+        isAttack = true;
         animator.SetTrigger("attack");
         // power 와 몬스터 상태를 계산해 공력력을 내보낸다
         //isAttack=false;
@@ -84,7 +143,7 @@ public class PlayerController : MonoBehaviour
     }
     private void animationUpdate()
     {
-        if (h == 0 && v == 0)
+        if (check(h,v))
             animator.SetBool("isRunning", false);
         else
             animator.SetBool("isRunning", true);

@@ -38,20 +38,4 @@ public class MonsterController : MonoBehaviour
 
 
     }
-
-    void OnCollisionStay(Collision other)
-    {
-        if (other.collider.tag == "Player")
-        {
-            Debug.Log("attacked");
-            if(playerScript.isAttack){
-                Debug.Log("몬스터 스크립트 내부 "+playerScript.isAttack);
-                Debug.Log("attacked");
-                animator.SetTrigger("attacked");
-            }
-           // Debug.Log("collisionEvent for monster");
-
-           // Debug.Log("collisionEvent : monster attacked");
-        }
-    }
 }
