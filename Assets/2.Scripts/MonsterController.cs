@@ -36,95 +36,22 @@ public class MonsterController : MonoBehaviour
     {
         enemyState = EnemyState.idle;
 
-        StartCoroutine(this.CheckEnemyState());
-        StartCoroutine(this.EnemyAction());
+
     }
 
-    IEnumerator CheckEnemyState()
+    void OnCollisionStay(Collision other)
     {
-        while(enemyState != EnemyState.die && enemyState != EnemyState.playerDie)
-        {
-            yield return new WaitForSeconds(0.2f);
-
-            float dist = Vector3.Distance(PlayerTr.position, EnemyTr.position);
-
-
-
-            if(enemyState != EnemyState.idle)
-            {
-                if (playerScript.PlayerHP == 0)
-                {
-                    enemyState = EnemyState.playerDie;
-                } else if (dist <= attackDist)
-                {
-                    enemyState = EnemyState.attack;
-                    animator.SetBool("battle", true);
-                }
-                else
-                {
-                    enemyState = EnemyState.trace;
-                }
-            }
-        }
-
-        yield return null;
-    }
-
-    IEnumerator EnemyAction()
-    {
-        while (enemyState != EnemyState.playerDie)
-        {
-
-            switch (enemyState)
-            {
-
-                case EnemyState.trace:
-                    nvAgent.SetDestination(PlayerTr.position);
-                    break;
-
-                case EnemyState.attack:
-                    nvAgent.ResetPath();
-                    animator.SetTrigger("attack");
-                    playerScript.hurt(damege);
-                    break;
-
-                case EnemyState.die:
-                    nvAgent.ResetPath();
-                    this.gameObject.SetActive(false);
-                    break;
-            }
-
-            yield return null;
-
-        }
-
-        void OnCollisionEnter(Collision coll)
-        {
-            if (coll.collider.tag == "weapon")
-            {
-
-                Debug.Log("Enemy Hit!");
-                //몬스터 공격받는 애니메이션\
-                animator.ResetTrigger("attacked");
-                if (enemyState != EnemyState.idle)
-                {
-                    //StopAllCoroutines();
-                    //enemyState = EnemyState.die;
-                    StartCoroutine(EnemyAction());
-                }
-
-            }
-        }
-    }
-
-    void OnCollisionEnter(Collision other)
-    {
- 
         if (other.collider.tag == "Player")
         {
-            Debug.Log("collisionEvent for monster");
-            animator.SetTrigger("attacked");
-            Debug.Log("collisionEvent : monster attacked");
+            Debug.Log("attacked");
+            if(playerScript.isAttack){
+                Debug.Log("몬스터 스크립트 내부 "+playerScript.isAttack);
+                Debug.Log("attacked");
+                animator.SetTrigger("attacked");
+            }
+           // Debug.Log("collisionEvent for monster");
+
+           // Debug.Log("collisionEvent : monster attacked");
         }
     }
 }
