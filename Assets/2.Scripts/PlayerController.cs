@@ -29,6 +29,10 @@ public class PlayerController : MonoBehaviour
     public bool canMove = true;
     public float attakDelay;
     private float currentAttackDelay;
+    private SceneMusicPlay musicPlay_walk;
+    private SceneMusicPlay musicPlay_sword;
+    private SceneMusicPlay musicPlay_attack;
+
 
 
     void Start()
@@ -38,6 +42,9 @@ public class PlayerController : MonoBehaviour
         animator = GetComponent<Animator>();
         isAttack = false;
         notMove = false;
+        musicPlay_walk = new SceneMusicPlay(GameObject.Find("Walk"));
+        musicPlay_sword = new SceneMusicPlay(GameObject.Find("SwordSE"));
+        musicPlay_attack = new SceneMusicPlay(GameObject.Find("AttackSE"));
     }
 
     IEnumerator MoveCoroutine()
@@ -55,6 +62,7 @@ public class PlayerController : MonoBehaviour
             yield return new WaitForSeconds(0.01f);
         }
 
+        musicPlay_walk.MusicStop();
         canMove = true;
     }
 
@@ -78,6 +86,7 @@ public class PlayerController : MonoBehaviour
         {
             if(h!=0 || v != 0)
             {
+                musicPlay_walk.MusicStart();
                 canMove = false;
                 StartCoroutine(MoveCoroutine());
             }
@@ -87,6 +96,8 @@ public class PlayerController : MonoBehaviour
         {
             if (Input.GetButtonDown("Fire1"))
             {
+                musicPlay_attack.MusicStart();
+                musicPlay_sword.MusicStart();
                 currentAttackDelay = attakDelay;
                 attack();
                 Debug.Log("attack!");

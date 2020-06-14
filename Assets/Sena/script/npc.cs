@@ -10,17 +10,19 @@ public class npc : MonoBehaviour
     public int love; // 호감도
 
     public GameObject dialog;
+    private SceneMusicPlay musicPlay;
 
 
     void Start()
     {
         dialog.SetActive(false);  // dialog창 비활성화 
+        musicPlay = new SceneMusicPlay(GameObject.Find("EdwardTheme"));
 
     }
 
     public void OnMouseDown() //npc인 에드워드가 눌리면
     {
-        Debug.Log("에드워드 눌림"); 
+        Debug.Log("에드워드 눌림");
         dialog.SetActive(true); // dialog창이 활성화댐
     
     }

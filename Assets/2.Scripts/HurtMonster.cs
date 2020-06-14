@@ -7,6 +7,7 @@ public class HurtMonster : MonoBehaviour
     public string atkSound;
 
     private PlayerStat thePlayerStat;
+
     // Start is called before the first frame update
     void Start()
     {

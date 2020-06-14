@@ -14,16 +14,19 @@ public class MonsterStat : MonoBehaviour
     private Animator animator;
     private Transform EnemyTr;
     private Transform transform;
+    private SceneMusicPlay musicPlay_hurt;
     // Start is called before the first frame update
     void Start()
     {
         transform = GetComponent<Transform>();
         currentHp = hp;
         animator = GetComponent<Animator>();
+        musicPlay_hurt = new SceneMusicPlay(GameObject.Find("MonsterHurtSE"));
     }
 
     public int Hit(int _playerAtk)
     {
+        musicPlay_hurt.MusicStart();
         animator.SetTrigger("attacked");
         int playerAtk = _playerAtk;
         int dmg;
