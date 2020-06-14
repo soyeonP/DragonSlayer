@@ -14,7 +14,7 @@ public class MainCamera : MonoBehaviour
 
     void Start()
     {
-        
+        Screen.SetResolution(1280, 720, false);
     }
 
     void LateUpdate()
