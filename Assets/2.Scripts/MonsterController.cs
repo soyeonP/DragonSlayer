@@ -14,6 +14,9 @@ public class MonsterController : MonoBehaviour
     private Animator animator;
     private float damege = 10.0f;
 
+
+
+
     public enum EnemyState { idle, trace, attack, die, move, playerDie };
     public EnemyState enemyState = EnemyState.idle;
     public float attackDist = 2.0f;
@@ -38,4 +41,6 @@ public class MonsterController : MonoBehaviour
 
 
     }
+
+
 }

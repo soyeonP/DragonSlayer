@@ -7,7 +7,7 @@ public class Interactable : MonoBehaviour
 {
     public float radius = 0.8f;
 
-    public Transform player;
+    private Transform player;
     private bool hasInteracted = false;
 
     void OnDrawGizmosSelected()
@@ -17,12 +17,18 @@ public class Interactable : MonoBehaviour
         Gizmos.DrawWireSphere(transform.position, radius);
     }
 
+
     public virtual void Interact()
     {
         //오버라이딩 가능
         //Debug.Log("접촉 " + transform.name);
     }
 
+    private void Awake()
+    {
+
+        player =GameObject.FindGameObjectWithTag("Player").transform;
+    }
     void Update()
     {
         float distance = Vector3.Distance(player.position, transform.position);

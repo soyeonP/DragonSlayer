@@ -2,20 +2,20 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class canvasmanage : MonoBehaviour
+public class DropItem : MonoBehaviour
 {
-    // Start is called before the first frame update
-
     public GameObject Element1;
     public GameObject Element2;
+    public Transform transform;
+    // Start is called before the first frame update
     void Start()
     {
-    
+        
     }
 
-    // Update is called once per frame
-    void Update()
+    void Drop()
     {
-       
+        Instantiate(Element1, transform);
     }
+
 }

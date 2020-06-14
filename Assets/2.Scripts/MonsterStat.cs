@@ -9,11 +9,15 @@ public class MonsterStat : MonoBehaviour
     public int atk;
     public int def;
     public int exp;
-
+    public GameObject Element1;
+    public GameObject Element2;
     private Animator animator;
+    private Transform EnemyTr;
+    private Transform transform;
     // Start is called before the first frame update
     void Start()
     {
+        transform = GetComponent<Transform>();
         currentHp = hp;
         animator = GetComponent<Animator>();
     }
@@ -32,12 +36,18 @@ public class MonsterStat : MonoBehaviour
 
         if(currentHp <= 0)
         {
+            Debug.Log(transform.position+" gg");
+            Instantiate(Element1, transform.position, transform.rotation);
+   
+            
             Destroy(this.gameObject);
+
             PlayerStat.instance.currentEXP += exp;
+
+
         }
 
         return dmg;
     }
-
 
 }
