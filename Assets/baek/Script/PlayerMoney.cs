@@ -17,15 +17,27 @@ public class PlayerMoney : MonoBehaviour
     }
     #endregion
 
-    static int moneyValue = 0;
+    public static int moneyValue = 0;
 
     public delegate void OnMoneyChanged(); //delegate: 함수에 대한 참조
     public OnMoneyChanged onMoneyChagedCallback;
 
-    public void addMoeny(int money)
+    public void addMoney(int money)
     {
-        money += money;
+        moneyValue += money;
         if (onMoneyChagedCallback != null)
             onMoneyChagedCallback.Invoke();
+    }
+
+    public void reduceMoney(int money)
+    {
+        moneyValue -= money;
+        if (onMoneyChagedCallback != null)
+            onMoneyChagedCallback.Invoke();
+    }
+
+    public int returnMoney()
+    {
+        return moneyValue;
     }
 }

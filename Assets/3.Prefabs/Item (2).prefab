@@ -94,7 +94,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   radius: 0.3
-  player: {fileID: 0}
   item: {fileID: 11400000, guid: c055ef0458674bb4a9db92fbd3f30c7d, type: 2}
 --- !u!136 &4068628927224499032
 CapsuleCollider:

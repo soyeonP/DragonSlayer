@@ -4,7 +4,8 @@ public class ItemPickup : Interactable
 {
     //[SerializeField] public Item item;
 
-    public Item item;
+    [SerializeField] Item item;
+    [SerializeField] int money = 0;
     SceneMusicPlay musicPlay;
 
     void Start()
@@ -16,6 +17,7 @@ public class ItemPickup : Interactable
     {
         base.Interact();
         PickUp();
+        if (money >= 0) getMoney(money);
     }
 
     void PickUp()
@@ -30,6 +32,11 @@ public class ItemPickup : Interactable
             }
             Destroy(gameObject);
         }
+    }
+
+    void getMoney(int money)
+    {
+        PlayerMoney.instance.addMoney(money);
     }
 
 }
