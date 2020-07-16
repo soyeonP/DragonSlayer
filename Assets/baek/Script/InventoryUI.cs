@@ -7,7 +7,6 @@ public class InventoryUI : MonoBehaviour
     Inventory inventory;
     InventorySlot[] slots;
    
-
     // Start is called before the first frame update
     void Start()
     {
@@ -21,11 +20,12 @@ public class InventoryUI : MonoBehaviour
     {
         Debug.Log("Updating UI, Slot size: " + slots.Length);
         for (int i=0; i< slots.Length; i++)
-        {
-            if (i < inventory.itemList.Count)
+        {   
+
+             if (i < inventory.itemList.Count)
             {
-                Debug.Log("Add Item");
                 slots[i].AddItem(inventory.itemList[i]);
+                //if(inventory.itemList[i].itemCount > 1) slots[i].setItemCountText(inventory.itemList[i].itemCount); //1개 이상이라면 수 표시
             }
             else
             {

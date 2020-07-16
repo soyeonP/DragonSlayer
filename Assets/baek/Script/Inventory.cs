@@ -31,6 +31,13 @@ public class Inventory : MonoBehaviour
 
     public bool Add (Item item) //아이템 추가 성공여부 반환
     {
+        //이미 인벤토리에 있는 아이테인지 확인. 이미 있었다면 수만 증감
+        bool hasSameIDItem = false;
+        int sameIDNum = 0;
+        for (int i = 0; i<itemList.Count; i++){
+            if(itemList[i].itemID == item.itemID) {hasSameIDItem = true; sameIDNum = i;}
+        }
+
         if (itemList.Count >= storage)
         {
             noticeText.text = "인벤토리 공간이 부족합니다.";
@@ -38,7 +45,10 @@ public class Inventory : MonoBehaviour
             StartCoroutine(FadeInOut()); //페이드 인아웃 코루틴
             return false;
         }
-        itemList.Add(item);
+        
+        if (!hasSameIDItem) itemList.Add(item);
+        else itemList[sameIDNum].itemCount += item.itemCount;
+        
         if (onItemChagedCallback != null)
             onItemChagedCallback.Invoke();
 

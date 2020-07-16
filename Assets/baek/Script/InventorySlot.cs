@@ -6,6 +6,7 @@ public class InventorySlot : MonoBehaviour
 
     public Image icon;
     public Item item;
+    public Text itemCountText;
 
     void Start()
     {
@@ -18,6 +19,7 @@ public class InventorySlot : MonoBehaviour
         Debug.Log("아이콘 업데이트" + gameObject.name);
         icon.sprite = item.itemIcon;
         icon.enabled = true;
+        itemCountText.text = newItem.itemCount.ToString();
     }
 
     public void ClearSlot()
@@ -28,5 +30,7 @@ public class InventorySlot : MonoBehaviour
         icon.enabled = false;
     }
 
-
+    public void setItemCountText(int n){
+        itemCountText.text = n.ToString();
+    }
 }
