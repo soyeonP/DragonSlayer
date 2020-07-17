@@ -21,11 +21,10 @@ public class InventoryUI : MonoBehaviour
         Debug.Log("Updating UI, Slot size: " + slots.Length);
         for (int i=0; i< slots.Length; i++)
         {   
-
-             if (i < inventory.itemList.Count)
+             if (i < inventory.itemList.Count) //해당 슬롯이 비어있거나 업데이트가 덜 되었다면
             {
                 slots[i].AddItem(inventory.itemList[i]);
-                //if(inventory.itemList[i].itemCount > 1) slots[i].setItemCountText(inventory.itemList[i].itemCount); //1개 이상이라면 수 표시
+                //if(inventory.itemList[i].returnItemCount() >= 1) slots[i].setItemCountText(inventory.itemList[i].returnItemCount()); //1개 이상이라면 수 표시
             }
             else
             {

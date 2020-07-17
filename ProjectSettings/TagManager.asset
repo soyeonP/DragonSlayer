@@ -6,6 +6,7 @@ TagManager:
   tags:
   - weapon
   - Monster
+  - EquipSlot
   layers:
   - Default
   - TransparentFX

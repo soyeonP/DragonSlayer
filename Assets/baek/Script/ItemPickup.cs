@@ -4,7 +4,12 @@ public class ItemPickup : Interactable
 {
     //[SerializeField] public Item item;
 
-    [SerializeField] Item item;
+    [System.Serializable]
+    public struct ItemInfo{
+        public Item item;
+        public int itemCount;
+    }
+    [SerializeField] ItemInfo itemInfo;
     [SerializeField] int money = 0;
     SceneMusicPlay musicPlay;
 
@@ -22,9 +27,8 @@ public class ItemPickup : Interactable
 
     void PickUp()
     {
-        //Debug.Log("아이템 획득: " + item.itemName);
-        bool wasPickedUp = Inventory.instance.Add(item);
-        if (wasPickedUp)
+        //Debug.Log("아이템 획득: " + item);
+        if (Inventory.instance.Add(itemInfo.item, itemInfo.itemCount))
         {
             if (musicPlay != null)
             {
