@@ -93,11 +93,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50ee226aaea6daa41a29f1e0d5c336af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  radius: 0.3
+  radius: 0.5
   itemInfo:
-    item: {fileID: 11400000, guid: f8415c2e4215ae840ba6eaf36f26782d, type: 2}
+    item: {fileID: 11400000, guid: c055ef0458674bb4a9db92fbd3f30c7d, type: 2}
     itemCount: 1
-  money: 0
+  money: 100
 --- !u!136 &4068628927224499032
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -108,7 +108,7 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1
-  m_Radius: 0.5
-  m_Height: 2
+  m_Radius: 15
+  m_Height: 1
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}

@@ -55,10 +55,10 @@ public class PlayerController : MonoBehaviour
         {
             h = Input.GetAxis("Horizontal");
             v = Input.GetAxis("Vertical");
-            move(h, v);
-            turn();
+            Move(h, v);
+            Turn();
           
-            animationUpdate();
+            AnimationUpdate();
 
             yield return new WaitForSeconds(0.01f);
         }
@@ -100,7 +100,7 @@ public class PlayerController : MonoBehaviour
                 musicPlay_attack.MusicStart();
                 musicPlay_sword.MusicStart();
                 currentAttackDelay = attakDelay;
-                attack();
+                Attack();
                 Debug.Log("attack!");
             }
         }
@@ -119,7 +119,7 @@ public class PlayerController : MonoBehaviour
         
     }
 
-    private void move(float h, float v)
+    private void Move(float h, float v)
     {
         movement.Set(h, 0, v);
         movement = movement.normalized * moveSpeed * Time.deltaTime;
@@ -128,7 +128,7 @@ public class PlayerController : MonoBehaviour
 
     }
 
-    private void turn()
+    private void Turn()
     {
         if (h == 0 && v == 0)
             return;
@@ -138,7 +138,7 @@ public class PlayerController : MonoBehaviour
         rigidbody.MoveRotation(newRotation);
     }
 
-    public float attack()
+    public float Attack()
     {
         isAttack = true;
         animator.SetTrigger("attack");
@@ -148,12 +148,12 @@ public class PlayerController : MonoBehaviour
         return power;
     }
 
-    public void hurt(float damage)
+    public void Hurt(float damage)
     {
         //받은 데미지 만큼 hp 감소
         hp = -damage;
     }
-    private void animationUpdate()
+    private void AnimationUpdate()
     {
         if (check(h,v))
             animator.SetBool("isRunning", false);

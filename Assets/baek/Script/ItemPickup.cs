@@ -15,6 +15,7 @@ public class ItemPickup : Interactable
 
     void Start()
     {
+        Debug.Log("itempickup start");
         musicPlay = new SceneMusicPlay(GameObject.Find("ItemClickSE"));
     }
 

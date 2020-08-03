@@ -39,7 +39,7 @@ public class MonsterStat : MonoBehaviour
 
         if(currentHp <= 0)
         {
-            Vector3 itemPosition = new Vector3(transform.position.x, Element1.GetComponent<Transform>().position.y, transform.position.z);
+            Vector3 itemPosition = new Vector3(transform.position.x, (float)(Element1.GetComponent<Transform>().position.y+0.2), transform.position.z);
             Debug.Log(transform.position+" gg");
             Instantiate(Element1, itemPosition, transform.rotation);
    

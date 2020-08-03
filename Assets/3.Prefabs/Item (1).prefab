@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 5469181932130133061}
   - component: {fileID: 5469181932130133060}
   - component: {fileID: 5469181932130133063}
-  - component: {fileID: 5469181932130133062}
   m_Layer: 0
   m_Name: Item (1)
   m_TagString: Untagged
@@ -94,19 +93,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   radius: 0.3
-  player: {fileID: 5073317388949721329, guid: 6396f16ccb0ca404d91fba0222a57fdb, type: 3}
-  item: {fileID: 11400000, guid: c055ef0458674bb4a9db92fbd3f30c7d, type: 2}
---- !u!136 &5469181932130133062
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5469181932130133081}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  m_Radius: 0.5
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
+  itemInfo:
+    item: {fileID: 0}
+    itemCount: 0
+  money: 0

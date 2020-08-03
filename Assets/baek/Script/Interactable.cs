@@ -21,17 +21,18 @@ public class Interactable : MonoBehaviour
     public virtual void Interact()
     {
         //오버라이딩 가능
-        Debug.Log("접촉 " + transform.name);
+        //Debug.Log("접촉 " + transform.name);
     }
 
     private void Awake()
     {
 
         player =GameObject.FindGameObjectWithTag("Player").transform;
-       // Debug.Log("접촉 " + transform.name);
+        
     }
     void Update()
     {
+
         float distance = Vector3.Distance(player.position, transform.position);
         if (!hasInteracted)
         {
