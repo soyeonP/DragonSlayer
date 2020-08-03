@@ -20,6 +20,7 @@ public class ItemPickup : Interactable
 
     public override void Interact()
     {
+        Debug.Log("interact");
         base.Interact();
         PickUp();
         if (money >= 0) getMoney(money);

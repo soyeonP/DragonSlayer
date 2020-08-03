@@ -94,7 +94,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   radius: 0.3
-  item: {fileID: 11400000, guid: c055ef0458674bb4a9db92fbd3f30c7d, type: 2}
+  itemInfo:
+    item: {fileID: 11400000, guid: f8415c2e4215ae840ba6eaf36f26782d, type: 2}
+    itemCount: 1
+  money: 0
 --- !u!136 &4068628927224499032
 CapsuleCollider:
   m_ObjectHideFlags: 0
