@@ -12,6 +12,8 @@ public class PlayerController : MonoBehaviour
     private Rigidbody rigidbody;
     private Animator animator;
     public GameObject attackBoundary;
+    GameObject scanobj = null; //sena 추가
+    public SenaGameManager manager; //sena 추가
 
     public float moveSpeed ;
     public float rotSpeed = 80.0f;
@@ -116,8 +118,36 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        
+        //Scan
+
+        if (Input.GetButtonDown("Jump") && scanobj != null)
+        {
+            manager.Action(scanobj);
+        }
+
     }
+
+    public void FixedUpdate()
+    {
+        // Ray
+        Debug.DrawRay(transform.position, rigidbody.transform.forward * 2f, Color.red);
+        RaycastHit hit;
+        if (Physics.Raycast(transform.position, rigidbody.transform.forward * 2f, out hit))
+        {
+            // Debug.Log(hit.collider.gameObject.name);
+        }
+
+        if (hit.collider != null)
+        {
+            scanobj = hit.collider.gameObject;
+        }
+        else
+            scanobj = null;
+
+        //Debug.Log(scanobj.name);  
+
+    }
+
 
     private void Move(float h, float v)
     {
