@@ -134,7 +134,7 @@ public class PlayerController : MonoBehaviour
             return;
 
         Quaternion newRotation = Quaternion.LookRotation(movement);
-
+        
         rigidbody.MoveRotation(newRotation);
     }
 
