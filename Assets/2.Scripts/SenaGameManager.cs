@@ -6,10 +6,14 @@ using UnityEngine.UI;
 public class SenaGameManager : MonoBehaviour
 {
 
+    public TalkManager Talkmanager;
     public GameObject talkPanel;
     public Text talkText;
     public GameObject scanObject;
     public bool isAction;
+    public int talkindex;
+
+
 
     public void Start()
     {
@@ -18,21 +22,47 @@ public class SenaGameManager : MonoBehaviour
     }
 
 
+    // 사물 스캔 인지
     public void Action(GameObject scanobj)
     {
-        Debug.Log(isAction);
-        if (isAction)
-        {
-            isAction = false;
-        }
-        else
-        {
-            isAction = true;
+ 
             scanObject = scanobj;
-            talkText.text = "이것의 이름은 " + scanObject.name + "이라고 한다.";
-        }
+            objData Objdata = scanObject.GetComponent<objData>();
+            Talk(Objdata.id, Objdata.isNpc);
+        
         talkPanel.SetActive(isAction);
 
     }
+
+    // npc 대화부분
+
+    void Talk(int id, bool isNpc)
+    {
+        string talkData = Talkmanager.GetTalk(id, talkindex);
+
+        if (talkData == null)
+        {
+            isAction = false;
+            talkindex = 0;
+            return;
+        }
+
+  
+
+        if (isNpc)
+        {
+            talkText.text = talkData;
+
+        }
+
+        else
+        {
+            talkText.text = talkData;
+            
+        }
+        isAction = true;
+        talkindex++;
+    }
+
 
 }
