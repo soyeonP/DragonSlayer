@@ -81,7 +81,6 @@ public class Inventory : MonoBehaviour
         if (onItemChagedCallback != null)
             onItemChagedCallback.Invoke();
     }
-
     IEnumerator FadeInOut()
     {
         Color textColor = noticeText.color;

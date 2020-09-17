@@ -17,7 +17,7 @@ public class PlayerMoney : MonoBehaviour
     }
     #endregion
 
-    public static int moneyValue = 0;
+    public static int moneyValue = 100; //기본 금액 100원
 
     public delegate void OnMoneyChanged(); //delegate: 함수에 대한 참조
     public OnMoneyChanged onMoneyChagedCallback;

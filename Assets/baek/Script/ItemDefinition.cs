@@ -37,7 +37,7 @@ public class ItemDefinition : MonoBehaviour,IPointerEnterHandler,IPointerExitHan
                 if (itemDef != null)
                 {
                     itemDef.SetActive(true);
-                    itemDef.transform.position = new Vector3(pos.position.x + 80, pos.position.y - 80, pos.position.z);
+                    itemDef.transform.position = new Vector3(pos.position.x + 100, pos.position.y - 120, pos.position.z);
                 }
                 itemNameText.text = thisSlot.item.itemName;
                 itemDefText.text = thisSlot.item.itemDescripton;
@@ -50,7 +50,7 @@ public class ItemDefinition : MonoBehaviour,IPointerEnterHandler,IPointerExitHan
                 if (itemDef != null)
                 {
                     itemDef.SetActive(true);
-                    itemDef.transform.position = new Vector3(pos.position.x + 50, pos.position.y - 50, pos.position.z);
+                    itemDef.transform.position = new Vector3(pos.position.x + 100, pos.position.y - 120, pos.position.z);
                 }
                 itemNameText.text = equipSlot.item.itemName;
                 itemDefText.text = equipSlot.item.itemDescripton;

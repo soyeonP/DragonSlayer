@@ -10,7 +10,29 @@ public class InventorySlot : MonoBehaviour, IPointerClickHandler
     
     GameObject equipSlotsParent;
     EqipSlot[] equipSlots;
+    GameObject Tap_sell;
+
+    GameObject noticeFrame;
+    GameObject noticeFrame_text;
+    GameObject noticeFrame_InputField;
+
     public void OnPointerClick(PointerEventData eventData){
+
+        if(item != null && Tap_sell != null){
+            if(Tap_sell.GetComponent<Toggle>().isOn){
+                noticeFrame.SetActive(true);
+                noticeFrame_text = GameObject.Find("NoticeFrame_text");
+                noticeFrame_InputField = GameObject.Find("NoticeFrame_InputField");
+                noticeFrame_text.GetComponent<Text>().text = "\"" + item.itemName + "\"";
+                ItemSellingNoticeFrameFunc.item = this.item;
+
+                int tmpCount = int.Parse(noticeFrame_InputField.GetComponent<InputField>().text);
+                if (tmpCount == null) tmpCount = 1;
+
+                ItemSellingNoticeFrameFunc.itemCount = tmpCount;
+            }
+        }
+    
         //우클릭일경우
         if(eventData.button == PointerEventData.InputButton.Right){
             if(item!=null && item.itemType == Item.ItemType.equip){
@@ -40,6 +62,8 @@ public class InventorySlot : MonoBehaviour, IPointerClickHandler
         icon.enabled = false;
         equipSlotsParent = GameObject.Find("EquipSlots");
         equipSlots = equipSlotsParent.GetComponentsInChildren<EqipSlot>();
+        Tap_sell = GameObject.Find("Tap_sell");
+        noticeFrame = ItemSellingNoticeFrameFunc.returnNoticeFrameGameObject();
     }
 
     public void AddItem(Item newItem)

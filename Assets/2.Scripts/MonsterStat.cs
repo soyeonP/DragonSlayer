@@ -15,6 +15,11 @@ public class MonsterStat : MonoBehaviour
     private Transform EnemyTr;
     private Transform transform;
     private SceneMusicPlay musicPlay_hurt;
+
+    GameObject myResponeObj;
+    public int spawnID { get; set; }
+
+    Vector3 originPos;
     // Start is called before the first frame update
     void Start()
     {
@@ -24,6 +29,12 @@ public class MonsterStat : MonoBehaviour
         musicPlay_hurt = new SceneMusicPlay(GameObject.Find("MonsterHurtSE"));
     }
 
+    public void setRespawnObj(GameObject respawnObj, int spawnID, Vector3 originPos)
+    {
+        myResponeObj = respawnObj;
+        this.spawnID = spawnID;
+        this.originPos = originPos;
+    }
     public int Hit(int _playerAtk)
     {
         musicPlay_hurt.MusicStart();
@@ -42,9 +53,10 @@ public class MonsterStat : MonoBehaviour
             Vector3 itemPosition = new Vector3(transform.position.x, (float)(Element1.GetComponent<Transform>().position.y+0.2), transform.position.z);
             Debug.Log(transform.position+" gg");
             Instantiate(Element1, itemPosition, transform.rotation);
-   
-            
-            Destroy(this.gameObject);
+
+
+            myResponeObj.GetComponent<MonsterManager>().RemoveMonster(spawnID);
+            //Destroy(this.gameObject);
 
             PlayerStat.instance.currentEXP += exp;
 
@@ -54,4 +66,5 @@ public class MonsterStat : MonoBehaviour
         return dmg;
     }
 
+    
 }

@@ -123,6 +123,7 @@ public class PlayerController : MonoBehaviour
         if (Input.GetButtonDown("Jump") && scanobj != null)
         {
             manager.Action(scanobj);
+
         }
 
     }
@@ -156,16 +157,20 @@ public class PlayerController : MonoBehaviour
 
         rigidbody.MovePosition(tr.position + movement);
 
+
     }
 
     private void Turn()
     {
         if (h == 0 && v == 0)
             return;
-
+        
         Quaternion newRotation = Quaternion.LookRotation(movement);
         
-        rigidbody.MoveRotation(newRotation);
+        transform.rotation = newRotation;
+        //rigidbody.MoveRotation(newRotation);
+
+
     }
 
     public float Attack()

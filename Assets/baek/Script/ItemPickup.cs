@@ -15,13 +15,11 @@ public class ItemPickup : Interactable
 
     void Start()
     {
-        Debug.Log("itempickup start");
         musicPlay = new SceneMusicPlay(GameObject.Find("ItemClickSE"));
     }
 
     public override void Interact()
     {
-        Debug.Log("interact");
         base.Interact();
         PickUp();
         if (money >= 0) getMoney(money);
